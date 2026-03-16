@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Все слова — Не агритесь, я переведу</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <div class="sticky-header">
+            <header class="header">
+                <a href="index.html" class="header__title">🗣️ Не агритесь, я переведу</a>
+            </header>
+            <div class="search-section">
+                <input type="text" class="search-input" id="searchInput" placeholder="Введите слово..." autocomplete="off">
+                <button class="search-button" id="searchButton">Найти</button>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+            <nav class="pc-nav">
+                <a href="index.html" class="pc-nav-item">🏠 Главная</a>
+                <a href="dictionary.html" class="pc-nav-item active">📚 Все слова</a>
+                <a href="situations.html" class="pc-nav-item">💬 Ситуации</a>
+            </nav>
+        </div>
+
+        <main class="main">
+            <h1>📚 Все слова</h1>
+            <div class="alphabet-index" id="alphabetIndex"></div>
+            <div id="dictionaryList" class="dictionary-list">Загрузка...</div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">🏠 Главная</a>
+            <a href="dictionary.html" class="nav-item active">📚 Все слова</a>
+            <a href="situations.html" class="nav-item">💬 Ситуации</a>
+        </nav>
+    </div>
+
+    <script src="dictionary.js"></script>
+</body>
+</html>

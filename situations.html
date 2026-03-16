@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Ситуации — Не агритесь, я переведу</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <div class="sticky-header">
+            <header class="header">
+                <a href="index.html" class="header__title">🗣️ Не агритесь, я переведу</a>
+            </header>
+            <div class="search-section">
+                <input type="text" class="search-input" id="searchInput" placeholder="Введите слово..." autocomplete="off">
+                <button class="search-button" id="searchButton">Найти</button>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+            <nav class="pc-nav">
+                <a href="index.html" class="pc-nav-item">🏠 Главная</a>
+                <a href="dictionary.html" class="pc-nav-item">📚 Все слова</a>
+                <a href="situations.html" class="pc-nav-item active">💬 Ситуации</a>
+            </nav>
+        </div>
+
+        <main class="main">
+            <h1>💬 Ситуации</h1>
+            <div id="situationsList"></div>
+        </main>
+
+        <!-- Модальное окно для слов -->
+        <div id="wordModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modalWordContent"></div>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">🏠 Главная</a>
+            <a href="dictionary.html" class="nav-item">📚 Все слова</a>
+            <a href="situations.html" class="nav-item active">💬 Ситуации</a>
+        </nav>
+    </div>
+
+    <script src="situations.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Слово не найдено</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <div class="sticky-header">
+            <header class="header">
+                <a href="index.html" class="header__title">🗣️ Не агритесь, я переведу</a>
+            </header>
+            <div class="search-section">
+                <input type="text" class="search-input" id="searchInput" placeholder="Введите слово..." autocomplete="off">
+                <button class="search-button" id="searchButton">Найти</button>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+            <nav class="pc-nav">
+                <a href="index.html" class="pc-nav-item">🏠 Главная</a>
+                <a href="dictionary.html" class="pc-nav-item">📚 Все слова</a>
+                <a href="situations.html" class="pc-nav-item">💬 Ситуации</a>
+            </nav>
+        </div>
+
+        <main class="main" style="justify-content: center; text-align: center;">
+            <div style="padding: 40px 20px;">
+                <h2>😕 Слово не найдено</h2>
+                <p id="searchedWordMessage" style="margin: 20px 0; font-size: 1.2rem;"></p>
+                <p>Вы можете предложить его нам, и мы добавим его в словарь.</p>
+                <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center;">
+                    <a href="dictionary.html" class="button">📚 Перейти в словарь</a>
+                    <a href="index.html" class="button">🏠 На главную</a>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">🏠 Главная</a>
+            <a href="dictionary.html" class="nav-item">📚 Все слова</a>
+            <a href="situations.html" class="nav-item">💬 Ситуации</a>
+        </nav>
+    </div>
+
+    <script>
+        // Показываем, какое слово искали
+        const urlParams = new URLSearchParams(window.location.search);
+        const word = urlParams.get('word');
+        const messageElement = document.getElementById('searchedWordMessage');
+        if (word) {
+            messageElement.innerHTML = `Вы искали: <strong>${word}</strong>`;
+        } else {
+            messageElement.innerHTML = 'К сожалению, такого слова пока нет в нашем словаре.';
+        }
+
+        // Поиск и автодополнение
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchButton');
+        const suggestions = document.getElementById('suggestions');
+
+        async function loadWordsForSuggestions() {
+            try {
+                const response = await fetch('data/words.json');
+                const data = await response.json();
+                const words = data.words || [];
+
+                function initSuggestions(input, wordsArray, container) {
+                    if (!input || !wordsArray) return;
+
+                    input.addEventListener('input', () => {
+                        const query = input.value.trim().toLowerCase();
+                        if (query.length === 0) {
+                            container.style.display = 'none';
+                            return;
+                        }
+
+                        const matches = wordsArray
+                            .filter(w => w.word.toLowerCase().startsWith(query))
+                            .slice(0, 5);
+
+                        if (matches.length === 0) {
+                            container.style.display = 'none';
+                            return;
+                        }
+
+                        container.innerHTML = matches.map(w =>
+                            `<div data-id="${w.id}">${w.word}</div>`
+                        ).join('');
+                        container.style.display = 'block';
+                    });
+
+                    container.addEventListener('click', (e) => {
+                        const target = e.target.closest('div');
+                        if (!target || !target.dataset.id) return;
+                        window.location.href = `word.html?id=${target.dataset.id}`;
+                    });
+
+                    input.addEventListener('blur', () => {
+                        setTimeout(() => { container.style.display = 'none'; }, 200);
+                    });
+
+                    input.addEventListener('focus', () => {
+                        if (input.value.trim().length > 0) {
+                            input.dispatchEvent(new Event('input'));
+                        }
+                    });
+                }
+
+                initSuggestions(searchInput, words, suggestions);
+            } catch (error) {
+                console.error('Ошибка загрузки слов для подсказок:', error);
+            }
+        }
+
+        loadWordsForSuggestions();
+
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', () => {
+                const query = searchInput.value.trim().toLowerCase();
+                if (!query) return;
+                window.location.href = `word.html?word=${encodeURIComponent(query)}`;
+            });
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') searchBtn.click();
+            });
+        }
+    </script>
+</body>
+</html>

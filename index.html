@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Не агритесь, я переведу</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sticky header с поиском и ПК-навигацией -->
+        <div class="sticky-header">
+            <header class="header">
+                <a href="index.html" class="header__title">🗣️ Не агритесь, я переведу</a>
+            </header>
+            <div class="search-section">
+                <input type="text" class="search-input" id="searchInput" placeholder="Введите слово..." autocomplete="off">
+                <button class="search-button" id="searchButton">Найти</button>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+            <!-- Навигация для ПК (видна только на широких экранах) -->
+            <nav class="pc-nav">
+                <a href="index.html" class="pc-nav-item active">🏠 Главная</a>
+                <a href="dictionary.html" class="pc-nav-item">📚 Все слова</a>
+                <a href="situations.html" class="pc-nav-item">💬 Ситуации</a>
+            </nav>
+        </div>
+
+        <main class="main">
+            <!-- Слово дня -->
+            <section class="word-of-day">
+                <h2>🔥 Слово дня</h2>
+                <div id="wordOfDayCard" class="word-card">
+                    <!-- загружается из js -->
+                </div>
+            </section>
+
+            <!-- А вы знали? (факты) -->
+            <section class="facts">
+                <h2>🤔 А вы знали?</h2>
+                <div id="factsContainer" class="facts-list">
+                    <!-- факты загружаются из js -->
+                </div>
+            </section>
+
+            <!-- Кнопка перехода в словарь (видна только на мобильных и планшетах) -->
+            <div class="to-dictionary mobile-only">
+                <a href="dictionary.html" class="button">📖 Перейти в словарь</a>
+            </div>
+
+            <!-- Навигационные карточки для ПК (видны только на широких экранах) -->
+            <div class="nav-cards">
+                <a href="dictionary.html" class="nav-card">
+                    <span class="nav-card-icon">📚</span>
+                    <span class="nav-card-title">Все слова</span>
+                    <span class="nav-card-desc">Полный словарь сленга</span>
+                </a>
+                <a href="situations.html" class="nav-card">
+                    <span class="nav-card-icon">💬</span>
+                    <span class="nav-card-title">Ситуации</span>
+                    <span class="nav-card-desc">Диалоги с переводом</span>
+                </a>
+                <a href="index.html" class="nav-card">
+                    <span class="nav-card-icon">🏠</span>
+                    <span class="nav-card-title">Главная</span>
+                    <span class="nav-card-desc">Слово дня и факты</span>
+                </a>
+            </div>
+        </main>
+
+        <!-- Нижнее меню (видно только на мобильных и планшетах) -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">🏠 Главная</a>
+            <a href="dictionary.html" class="nav-item">📚 Все слова</a>
+            <a href="situations.html" class="nav-item">💬 Ситуации</a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
